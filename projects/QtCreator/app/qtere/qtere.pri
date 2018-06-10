@@ -53,21 +53,43 @@ $${qtere_DEFINES} \
 # qtere_exe HEADERS
 #
 qtere_exe_HEADERS += \
+$${ARBORA_SRC}/xos/fs/tree/branch.hpp \
 $${FILA_SRC}/xos/console/main_main.hpp \
 $${VEDERE_SRC}/xos/gui/main.hpp \
 $${QTERE_SRC}/xos/gui/qt/Qt.hpp \
+$${QTERE_SRC}/xos/gui/qt/String.hpp \
+$${QTERE_SRC}/xos/gui/qt/Widget.hpp \
+$${QTERE_SRC}/xos/gui/qt/Splitter.hpp \
+$${QTERE_SRC}/xos/gui/qt/HBoxLayout.hpp \
+$${QTERE_SRC}/xos/gui/qt/standard/Item.hpp \
+$${QTERE_SRC}/xos/gui/qt/standard/ItemModel.hpp \
+$${QTERE_SRC}/xos/gui/qt/ListView.hpp \
+$${QTERE_SRC}/xos/gui/qt/TableView.hpp \
+$${QTERE_SRC}/xos/gui/qt/TreeView.hpp \
 $${QTERE_SRC}/xos/gui/qt/application/MainWindow.hpp \
 $${QTERE_SRC}/xos/gui/qt/application/Main.hpp \
 $${QTERE_SRC}/xos/gui/qt/application/WindowMain.hpp \
+$${QTERE_SRC}/xos/app/gui/qt/qtere/ListView.hpp \
+$${QTERE_SRC}/xos/app/gui/qt/qtere/TableView.hpp \
+$${QTERE_SRC}/xos/app/gui/qt/qtere/TreeView.hpp \
 $${QTERE_SRC}/xos/app/gui/qt/qtere/MainWindow.hpp \
 $${QTERE_SRC}/xos/app/gui/qt/qtere/Main.hpp \
 
 # qtere_exe SOURCES
 #
 qtere_exe_SOURCES += \
+$${ARBORA_SRC}/xos/fs/tree/branch.cpp \
 $${FILA_SRC}/xos/console/main_main.cpp \
 $${QTERE_SRC}/xos/gui/qt/Qt.cpp \
+$${QTERE_SRC}/xos/gui/qt/String.cpp \
+$${QTERE_SRC}/xos/gui/qt/Widget.cpp \
+$${QTERE_SRC}/xos/gui/qt/Splitter.cpp \
+$${QTERE_SRC}/xos/gui/qt/HBoxLayout.cpp \
+$${QTERE_SRC}/xos/gui/qt/standard/Item.cpp \
+$${QTERE_SRC}/xos/gui/qt/standard/ItemModel.cpp \
 $${QTERE_SRC}/xos/gui/qt/application/WindowMain.cpp \
+$${QTERE_SRC}/xos/app/gui/qt/qtere/TableView.cpp \
+$${QTERE_SRC}/xos/app/gui/qt/qtere/TreeView.cpp \
 $${QTERE_SRC}/xos/app/gui/qt/qtere/MainWindow.cpp \
 $${QTERE_SRC}/xos/app/gui/qt/qtere/Main.cpp \
 
@@ -81,5 +103,3 @@ $${qtere_FRAMEWORKS} \
 #
 qtere_exe_LIBS += \
 $${qtere_LIBS} \
-
-
