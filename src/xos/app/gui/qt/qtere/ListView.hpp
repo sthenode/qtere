@@ -13,62 +13,65 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: MainWindow.hpp
+///   File: ListView.hpp
 ///
 /// Author: $author$
-///   Date: 5/31/2018
+///   Date: 6/3/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GUI_QT_APPLICATION_MAINWINDOW_HPP
-#define _XOS_GUI_QT_APPLICATION_MAINWINDOW_HPP
+#ifndef _XOS_APP_GUI_QT_QTERE_LISTVIEW_HPP
+#define _XOS_APP_GUI_QT_QTERE_LISTVIEW_HPP
 
-#include "xos/gui/qt/Qt.hpp"
+#include "xos/gui/qt/ListView.hpp"
 
 namespace xos {
+namespace app {
 namespace gui {
 namespace qt {
-namespace application {
+namespace qtere {
 
-typedef QMainWindow MainWindowt_extends;
+typedef implement_base ListViewt_implements;
+typedef xos::gui::qt::ListView ListViewt_extends;
 ///////////////////////////////////////////////////////////////////////
-///  Class: MainWindowt
+///  Class: ListViewt
 ///////////////////////////////////////////////////////////////////////
-template <class TExtends = MainWindowt_extends>
-class _EXPORT_CLASS MainWindowt: public TExtends {
+template 
+<class TImplements = ListViewt_implements, class TExtends = ListViewt_extends>
+
+class _EXPORT_CLASS ListViewt: virtual public TImplements, public TExtends {
 public:
+    typedef TImplements implements;
     typedef TExtends extends;
 
-    MainWindowt() {
+    ListViewt(QWidget* parent): extends(parent) {
+        construct();
     }
-    virtual ~MainWindowt() {
+    ListViewt() {
+        construct();
+    }
+    virtual ~ListViewt() {
+        destruct();
     }
 private:
-    MainWindowt(const MainWindowt &copy) {
+    ListViewt(const ListViewt &copy) {
         LOG_ERROR("...unexpected throw (exception(exception_failed))...");
         throw (exception(exception_failed));
     }
-
-public:
-    virtual bool afterCreate
-    (QApplication& qApplication, int argc, char_t** argv, char_t** env) {
-        return true;
-    }
-    virtual bool beforeDestroy
-    (QApplication& qApplication, int argc, char_t** argv, char_t** env) {
-        return true;
-    }
-
+    
 protected:
-    virtual void resizeEvent(QResizeEvent *event) {
-        extends::resizeEvent(event);
+    void construct() {
+        this->resizeToParent();
+    }
+    void destruct() {
     }
 
 protected:
 };
-typedef MainWindowt<> MainWindow;
+typedef ListViewt<> ListView;
 
-} /// namespace application
+} /// namespace qtere
 } /// namespace qt
 } /// namespace gui
+} /// namespace app
 } /// namespace xos
 
-#endif /// _XOS_GUI_QT_APPLICATION_MAINWINDOW_HPP 
+#endif /// _XOS_APP_GUI_QT_QTERE_LISTVIEW_HPP 

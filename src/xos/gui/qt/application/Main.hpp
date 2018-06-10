@@ -46,6 +46,8 @@ public:
     }
 private:
     Maint(const Maint &copy) {
+        LOG_ERROR("...unexpected throw (exception(exception_failed))...");
+        throw (exception(exception_failed));
     }
 
 protected:

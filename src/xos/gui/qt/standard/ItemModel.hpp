@@ -13,28 +13,58 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: Qt.hpp
+///   File: ItemModel.hpp
 ///
 /// Author: $author$
-///   Date: 5/30/2018
+///   Date: 6/7/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GUI_QT_QT_HPP
-#define _XOS_GUI_QT_QT_HPP
+#ifndef _XOS_GUI_QT_STANDARD_ITEMMODEL_HPP
+#define _XOS_GUI_QT_STANDARD_ITEMMODEL_HPP
 
-#include "xos/io/logger.hpp"
-#include <QtCore/QtCore>
-#if  (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
-#include <QtGui/QtGui>
-#else
-#include <QtWidgets/QtWidgets>
-#endif
+#include "xos/gui/qt/Qt.hpp"
 
 namespace xos {
 namespace gui {
 namespace qt {
+namespace standard {
 
+typedef QStandardItemModel ItemModelExtends;
+///////////////////////////////////////////////////////////////////////
+///  Class: ItemModel
+///////////////////////////////////////////////////////////////////////
+class _EXPORT_CLASS ItemModel: public ItemModelExtends {
+Q_OBJECT
+public:
+    typedef ItemModelExtends extends;
+
+    ItemModel(int rows, int cols, QObject* parent): extends(rows, cols, parent) {
+        construct();
+    }
+    ItemModel(QObject* parent): extends(parent) {
+        construct();
+    }
+    ItemModel() {
+        construct();
+    }
+    virtual ~ItemModel() {
+        destruct();
+    }
+private:
+    ItemModel(const ItemModel &copy) {
+    }
+    
+protected:
+    void construct() {
+    }
+    void destruct() {
+    }
+    
+protected:
+};
+
+} /// namespace standard
 } /// namespace qt
 } /// namespace gui
 } /// namespace xos
 
-#endif /// _XOS_GUI_QT_QT_HPP 
+#endif /// _XOS_GUI_QT_STANDARD_ITEMMODEL_HPP 

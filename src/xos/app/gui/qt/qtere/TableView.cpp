@@ -13,28 +13,30 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: Qt.hpp
+///   File: TableView.cpp
 ///
 /// Author: $author$
-///   Date: 5/30/2018
+///   Date: 6/3/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GUI_QT_QT_HPP
-#define _XOS_GUI_QT_QT_HPP
-
-#include "xos/io/logger.hpp"
-#include <QtCore/QtCore>
-#if  (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
-#include <QtGui/QtGui>
-#else
-#include <QtWidgets/QtWidgets>
-#endif
+#include "xos/app/gui/qt/qtere/TableView.hpp"
 
 namespace xos {
+namespace app {
 namespace gui {
 namespace qt {
+namespace qtere {
 
+///////////////////////////////////////////////////////////////////////
+///  Class: TableView_implementt
+///////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////
+///  Class: TableViewt
+///////////////////////////////////////////////////////////////////////
+
+} /// namespace qtere
 } /// namespace qt
 } /// namespace gui
+} /// namespace app
 } /// namespace xos
 
-#endif /// _XOS_GUI_QT_QT_HPP 

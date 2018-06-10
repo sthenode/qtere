@@ -13,28 +13,40 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: Qt.hpp
+///   File: StandardItemModel.hpp
 ///
 /// Author: $author$
-///   Date: 5/30/2018
+///   Date: 6/7/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GUI_QT_QT_HPP
-#define _XOS_GUI_QT_QT_HPP
+#ifndef _XOS_GUI_QT_STANDARDITEMMODEL_HPP
+#define _XOS_GUI_QT_STANDARDITEMMODEL_HPP
 
-#include "xos/io/logger.hpp"
-#include <QtCore/QtCore>
-#if  (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
-#include <QtGui/QtGui>
-#else
-#include <QtWidgets/QtWidgets>
-#endif
+#include "xos/gui/qt/Qt.hpp"
 
 namespace xos {
 namespace gui {
 namespace qt {
 
+typedef QStandardItemModel StandardItemModelt_extends;
+///////////////////////////////////////////////////////////////////////
+///  Class: StandardItemModelt
+///////////////////////////////////////////////////////////////////////
+template <class TExtends = StandardItemModelt_extends>
+class _EXPORT_CLASS StandardItemModelt: public TExtends {
+public:
+    typedef TExtends extends;
+
+    StandardItemModelt(const StandardItemModelt &copy) {
+    }
+    StandardItemModelt() {
+    }
+    virtual ~StandardItemModelt() {
+    }
+};
+typedef StandardItemModelt<> StandardItemModel;
+
 } /// namespace qt
 } /// namespace gui
 } /// namespace xos
 
-#endif /// _XOS_GUI_QT_QT_HPP 
+#endif /// _XOS_GUI_QT_STANDARDITEMMODEL_HPP 

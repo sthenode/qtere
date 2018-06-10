@@ -13,28 +13,44 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: Qt.hpp
+///   File: HBoxLayout.hpp
 ///
 /// Author: $author$
-///   Date: 5/30/2018
+///   Date: 6/5/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GUI_QT_QT_HPP
-#define _XOS_GUI_QT_QT_HPP
+#ifndef _XOS_GUI_QT_HBOXLAYOUT_HPP
+#define _XOS_GUI_QT_HBOXLAYOUT_HPP
 
-#include "xos/io/logger.hpp"
-#include <QtCore/QtCore>
-#if  (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
-#include <QtGui/QtGui>
-#else
-#include <QtWidgets/QtWidgets>
-#endif
+#include "xos/gui/qt/Widget.hpp"
 
 namespace xos {
 namespace gui {
 namespace qt {
 
+typedef QHBoxLayout HBoxLayoutExtends;
+///////////////////////////////////////////////////////////////////////
+///  Class: HBoxLayout
+///////////////////////////////////////////////////////////////////////
+class _EXPORT_CLASS HBoxLayout: public HBoxLayoutExtends {
+Q_OBJECT
+public:
+    typedef HBoxLayoutExtends extends;
+
+    HBoxLayout(QWidget* parent): extends(parent) {
+    }
+    HBoxLayout() {
+    }
+    virtual ~HBoxLayout() {
+    }
+private:
+    HBoxLayout(const HBoxLayout &copy) {
+    }
+
+protected:
+};
+
 } /// namespace qt
 } /// namespace gui
 } /// namespace xos
 
-#endif /// _XOS_GUI_QT_QT_HPP 
+#endif /// _XOS_GUI_QT_HBOXLAYOUT_HPP 

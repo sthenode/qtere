@@ -13,62 +13,77 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: MainWindow.hpp
+///   File: ListView.hpp
 ///
 /// Author: $author$
-///   Date: 5/31/2018
+///   Date: 6/3/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GUI_QT_APPLICATION_MAINWINDOW_HPP
-#define _XOS_GUI_QT_APPLICATION_MAINWINDOW_HPP
+#ifndef _XOS_GUI_QT_LISTVIEW_HPP
+#define _XOS_GUI_QT_LISTVIEW_HPP
 
-#include "xos/gui/qt/Qt.hpp"
+#include "xos/gui/qt/Widget.hpp"
 
 namespace xos {
 namespace gui {
 namespace qt {
-namespace application {
 
-typedef QMainWindow MainWindowt_extends;
+typedef Widgett<QListView> ListViewExtends;
 ///////////////////////////////////////////////////////////////////////
-///  Class: MainWindowt
+///  Class: ListView
 ///////////////////////////////////////////////////////////////////////
-template <class TExtends = MainWindowt_extends>
-class _EXPORT_CLASS MainWindowt: public TExtends {
+class _EXPORT_CLASS ListView: public ListViewExtends {
+Q_OBJECT
 public:
-    typedef TExtends extends;
+    typedef ListViewExtends extends;
 
-    MainWindowt() {
+    ListView(QWidget* parent): extends(parent) {
+        construct();
     }
-    virtual ~MainWindowt() {
+    ListView() {
+        construct();
+    }
+    virtual ~ListView() {
+        destruct();
     }
 private:
-    MainWindowt(const MainWindowt &copy) {
+    ListView(const ListView &copy) {
         LOG_ERROR("...unexpected throw (exception(exception_failed))...");
         throw (exception(exception_failed));
     }
 
-public:
-    virtual bool afterCreate
-    (QApplication& qApplication, int argc, char_t** argv, char_t** env) {
-        return true;
+protected slots:
+    virtual void onActivated(const QModelIndex& index) {
+        LOG_DEBUG("...row = " << index.row() << " column = " << index.column());
     }
-    virtual bool beforeDestroy
-    (QApplication& qApplication, int argc, char_t** argv, char_t** env) {
-        return true;
+    virtual void onClicked(const QModelIndex& index) {
+        LOG_DEBUG("...row = " << index.row() << " column = " << index.column());
+    }
+    virtual void onDoubleClicked(const QModelIndex& index) {
+        LOG_DEBUG("...row = " << index.row() << " column = " << index.column());
     }
 
 protected:
-    virtual void resizeEvent(QResizeEvent *event) {
-        extends::resizeEvent(event);
-    }
+    void construct() {
+        connect
+        (this, SIGNAL(activated(const QModelIndex)),
+         this, SLOT(onActivated(const QModelIndex)));
 
+        connect
+        (this, SIGNAL(clicked(const QModelIndex)),
+         this, SLOT(onClicked(const QModelIndex)));
+
+        connect
+        (this, SIGNAL(doubleClicked(const QModelIndex)),
+         this, SLOT(onDoubleClicked(const QModelIndex)));
+    }
+    void destruct() {
+    }
+    
 protected:
 };
-typedef MainWindowt<> MainWindow;
 
-} /// namespace application
 } /// namespace qt
 } /// namespace gui
 } /// namespace xos
 
-#endif /// _XOS_GUI_QT_APPLICATION_MAINWINDOW_HPP 
+#endif /// _XOS_GUI_QT_LISTVIEW_HPP 

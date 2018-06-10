@@ -69,8 +69,35 @@ protected:
     virtual bool afterCreateMainWindow
     (QMainWindow* qMainWindow, QApplication& qApplication,
      int argc, char_t** argv, char_t** env) {
-        qMainWindow->resize(mainWindowWidth(), mainWindowHeight());
-        return true;
+        MainWindow* mainWindow = 0;
+
+        if (qMainWindow == (mainWindow = mainWindow_)) {
+            mainWindow->resize(mainWindowWidth(), mainWindowHeight());
+
+            LOG_DEBUG("mainWindow->afterCreate(qApplication, argc, argv, env)...");
+            if ((mainWindow->afterCreate(qApplication, argc, argv, env))) {
+                return true;
+            } else {
+                LOG_ERROR("...failed on mainWindow->afterCreate(qApplication, argc, argv, env)");
+            }
+        }
+        return false;
+    }
+    virtual bool beforeDestroyMainWindow
+    (QMainWindow* qMainWindow, QApplication& qApplication,
+     int argc, char_t** argv, char_t** env) {
+        MainWindow* mainWindow = 0;
+
+        if (qMainWindow == (mainWindow = mainWindow_)) {
+
+            LOG_DEBUG("mainWindow->beforeDestroy(qApplication, argc, argv, env)...");
+            if ((mainWindow->beforeDestroy(qApplication, argc, argv, env))) {
+                return true;
+            } else {
+                LOG_ERROR("...failed on beforeDestroyCreate(qApplication, argc, argv, env)");
+            }
+        }
+        return false;
     }
 
     virtual size_t mainWindowWidth() const {

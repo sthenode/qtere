@@ -13,28 +13,63 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: Qt.hpp
+///   File: Item.hpp
 ///
 /// Author: $author$
-///   Date: 5/30/2018
+///   Date: 6/7/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GUI_QT_QT_HPP
-#define _XOS_GUI_QT_QT_HPP
+#ifndef _XOS_GUI_QT_STANDARD_ITEM_HPP
+#define _XOS_GUI_QT_STANDARD_ITEM_HPP
 
-#include "xos/io/logger.hpp"
-#include <QtCore/QtCore>
-#if  (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
-#include <QtGui/QtGui>
-#else
-#include <QtWidgets/QtWidgets>
-#endif
+#include "xos/gui/qt/Qt.hpp"
 
 namespace xos {
 namespace gui {
 namespace qt {
+namespace standard {
 
+typedef QStandardItem ItemExtends;
+///////////////////////////////////////////////////////////////////////
+///  Class: Item
+///////////////////////////////////////////////////////////////////////
+class _EXPORT_CLASS Item: public ItemExtends {
+public:
+    typedef ItemExtends extends;
+
+    Item(const QIcon& icon, const QString& text): extends(icon, text) {
+        construct();
+    }
+    Item(const QString& text): extends(text) {
+        construct();
+    }
+    Item(int rows, int cols): extends(rows, cols) {
+        construct();
+    }
+    Item(int rows): extends(rows, 1) {
+        construct();
+    }
+    Item() {
+        construct();
+    }
+    virtual ~Item() {
+        destruct();
+    }
+private:
+    Item(const Item &copy) {
+    }
+    
+protected:
+    void construct() {
+    }
+    void destruct() {
+    }
+    
+protected:
+};
+
+} /// namespace standard
 } /// namespace qt
 } /// namespace gui
 } /// namespace xos
 
-#endif /// _XOS_GUI_QT_QT_HPP 
+#endif /// _XOS_GUI_QT_STANDARD_ITEM_HPP 
