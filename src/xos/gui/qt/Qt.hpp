@@ -33,6 +33,56 @@ namespace xos {
 namespace gui {
 namespace qt {
 
+enum {
+    EventMessage = QEvent::User+1
+};
+
+///////////////////////////////////////////////////////////////////////
+///  Class: Message
+///////////////////////////////////////////////////////////////////////
+class Message {
+public:
+    typedef int Type;
+    typedef void* Data;
+    enum {
+        InvalidateWidget
+    };
+    Message(Type type = 0, Data data = 0): type_(type), data_(data) {
+    }
+    Message(const Message& copy): type_(copy.type()), data_(copy.data()) {
+    }
+    virtual Type type() const {
+        return type_;
+    }
+    virtual Data data() const {
+        return data_;
+    }
+protected:
+    Type type_;
+    Data data_;
+};
+
+///////////////////////////////////////////////////////////////////////
+///  Class: MessageEvent
+///////////////////////////////////////////////////////////////////////
+class MessageEvent: public QEvent {
+public:
+    typedef QEvent extends;
+    MessageEvent(Message::Type type = 0, Message::Data data = 0)
+    : extends((Type)EventMessage), message_(type, data) {
+    }
+    MessageEvent(const MessageEvent& copy)
+    : extends((Type)EventMessage), message_(copy.message()) {
+    }
+    virtual ~MessageEvent() {
+    }
+    virtual const Message& message() const {
+        return message_;
+    }
+protected:
+    Message message_;
+};
+
 } /// namespace qt
 } /// namespace gui
 } /// namespace xos

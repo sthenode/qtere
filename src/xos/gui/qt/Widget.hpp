@@ -54,6 +54,15 @@ public:
         }
         return this->size();
     }
+    virtual bool postMessage(Message::Type type, Message::Data data = 0) {
+        MessageEvent* event = 0;
+        if ((event = new MessageEvent(type, data))) {
+
+            LOG_TRACE("QApplication::postEvent(this, event)...");
+            QApplication::postEvent(this, event);
+        }
+        return false;
+    }
 
 protected:
     virtual void mouseReleaseEvent(QMouseEvent* event) {
@@ -69,13 +78,37 @@ protected:
                 if (Qt::LeftButton == (button)) {
                     onLeftButtonReleaseEvent(pos, *event);
                 } else {
+                    onButtonReleaseEvent(pos, *event);
                 }
             }
         }
     }
     virtual void onRightButtonReleaseEvent(const QPoint& pos, const QMouseEvent& event) {
+        onButtonReleaseEvent(pos, event);
     }
     virtual void onLeftButtonReleaseEvent(const QPoint& pos, const QMouseEvent& event) {
+        onButtonReleaseEvent(pos, event);
+    }
+    virtual void onButtonReleaseEvent(const QPoint& pos, const QMouseEvent& event) {
+    }
+    
+    virtual void customEvent(QEvent* event) {
+        if ((event)) {
+            QEvent::Type type = event->type();
+            
+            LOG_TRACE("...type = " << type);
+            onCustomEvent(type, *event);
+        }
+    }
+    virtual void onCustomEvent(const QEvent::Type& type, const QEvent& event) {
+        if (EventMessage == (type)) {
+            onMessageEvent((const MessageEvent&)event);
+        }
+    }
+    virtual void onMessageEvent(const MessageEvent& event) {
+        onMessage(event.message().type(), event.message().data());
+    }
+    virtual void onMessage(const Message::Type& type, const Message::Data& data) {
     }
     
 protected:

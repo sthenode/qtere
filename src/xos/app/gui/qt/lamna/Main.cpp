@@ -13,62 +13,27 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: MainWindow.hpp
+///   File: Main.cpp
 ///
 /// Author: $author$
-///   Date: 5/31/2018
+///   Date: 6/11/2018
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_GUI_QT_APPLICATION_MAINWINDOW_HPP
-#define _XOS_GUI_QT_APPLICATION_MAINWINDOW_HPP
-
-#include "xos/gui/qt/Widget.hpp"
+#include "xos/app/gui/qt/lamna/Main.hpp"
 
 namespace xos {
+namespace app {
 namespace gui {
 namespace qt {
-namespace application {
+namespace lamna {
 
-typedef Widgett<QMainWindow> MainWindowt_extends;
 ///////////////////////////////////////////////////////////////////////
-///  Class: MainWindowt
+///  Class: maint
 ///////////////////////////////////////////////////////////////////////
-template <class TExtends = MainWindowt_extends>
-class _EXPORT_CLASS MainWindowt: public TExtends {
-public:
-    typedef TExtends extends;
+static Main theMain;
 
-    MainWindowt() {
-    }
-    virtual ~MainWindowt() {
-    }
-private:
-    MainWindowt(const MainWindowt &copy) {
-        LOG_ERROR("...unexpected throw (exception(exception_failed))...");
-        throw (exception(exception_failed));
-    }
-
-public:
-    virtual bool afterCreate
-    (QApplication& qApplication, int argc, char_t** argv, char_t** env) {
-        return true;
-    }
-    virtual bool beforeDestroy
-    (QApplication& qApplication, int argc, char_t** argv, char_t** env) {
-        return true;
-    }
-
-protected:
-    virtual void resizeEvent(QResizeEvent *event) {
-        extends::resizeEvent(event);
-    }
-
-protected:
-};
-typedef MainWindowt<> MainWindow;
-
-} /// namespace application
+} /// namespace lamna
 } /// namespace qt
 } /// namespace gui
+} /// namespace app
 } /// namespace xos
 
-#endif /// _XOS_GUI_QT_APPLICATION_MAINWINDOW_HPP 
