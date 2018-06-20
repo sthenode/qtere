@@ -44,6 +44,8 @@ public:
     }
 private:
     Widgett(const Widgett &copy) {
+        LOG_ERROR("...unexpected throw (exception(exception_failed))...");
+        throw (exception(exception_failed));
     }
 
 public:    
@@ -65,6 +67,18 @@ public:
     }
 
 protected:
+    virtual void resizeEvent(QResizeEvent *event) {
+        extends::resizeEvent(event);
+        if ((event)) {
+            const QSize& size  = event->size();
+
+            LOG_DEBUG("...width = " << size.width() << ", height = " << size.height());
+            onResizeEvent(size, *event);
+        }
+    }
+    virtual void onResizeEvent(const QSize& size, const QResizeEvent& event) {
+    }
+
     virtual void mouseReleaseEvent(QMouseEvent* event) {
         extends::mouseReleaseEvent(event);
         if ((event)) {

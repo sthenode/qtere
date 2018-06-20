@@ -105,6 +105,10 @@ protected:
     (graphic::surface::image_interface& im, int x, int y, int w, int h, int r) {
         im.fill_circle(x,y, r);
     }
+    virtual void hollow_circle
+    (graphic::surface::image_interface& im, int x, int y, int w, int h, int r) {
+        im.hollow_circle(x,y, r);
+    }
 
     virtual void draw_ellipse
     (graphic::surface::image_interface& im, int x, int y, int w, int h, int r) {
@@ -114,20 +118,32 @@ protected:
     (graphic::surface::image_interface& im, int x, int y, int w, int h, int r) {
         im.fill_ellipse(x,y, w,h);
     }
+    virtual void hollow_ellipse
+    (graphic::surface::image_interface& im, int x, int y, int w, int h, int r) {
+        im.hollow_ellipse(x,y, w,h);
+    }
 
     virtual plot_t switch_plot() {
         if ((&derives::draw != (plot_)) && (plot_)) {
             if (&derives::fill != (plot_)) {
                 if (&derives::draw_circle != (plot_)) {
                     if (&derives::fill_circle != (plot_)) {
-                        if (&derives::draw_ellipse != (plot_)) {
-                            plot_ = &derives::draw;
-                            switch_paint();
+                        if (&derives::hollow_circle != (plot_)) {
+                            if (&derives::draw_ellipse != (plot_)) {
+                                if (&derives::fill_ellipse != (plot_)) {
+                                    plot_ = &derives::draw;
+                                    switch_paint();
+                                } else {
+                                    plot_ = &derives::hollow_ellipse;
+                                }
+                            } else {
+                                plot_ = &derives::fill_ellipse;
+                            }
                         } else {
-                            plot_ = &derives::fill_ellipse;
+                            plot_ = &derives::draw_ellipse;
                         }
                     } else {
-                        plot_ = &derives::draw_ellipse;
+                        plot_ = &derives::hollow_circle;
                     }
                 } else {
                     plot_ = &derives::fill_circle;
