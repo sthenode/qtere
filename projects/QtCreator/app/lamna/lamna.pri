@@ -63,8 +63,10 @@ $${LAMNA_SRC}/xos/graphic/image_interface.hpp \
 $${LAMNA_SRC}/xos/graphic/bresenham_line.hpp \
 $${LAMNA_SRC}/xos/graphic/bresenham_image.hpp \
 $${LAMNA_SRC}/xos/graphic/midpoint_circle.hpp \
+$${LAMNA_SRC}/xos/graphic/hollow_midpoint_circle.hpp \
 $${LAMNA_SRC}/xos/graphic/midpoint_circle_image.hpp \
 $${LAMNA_SRC}/xos/graphic/midpoint_ellipse.hpp \
+$${LAMNA_SRC}/xos/graphic/hollow_midpoint_ellipse.hpp \
 $${LAMNA_SRC}/xos/graphic/midpoint_ellipse_image.hpp \
 $${LAMNA_SRC}/xos/graphic/base_image.hpp \
 $${LAMNA_SRC}/xos/graphic/image.hpp \
@@ -100,8 +102,10 @@ $${LAMNA_SRC}/xos/graphic/image_base.cpp \
 $${LAMNA_SRC}/xos/graphic/bresenham_line.cpp \
 $${LAMNA_SRC}/xos/graphic/bresenham_image.cpp \
 $${LAMNA_SRC}/xos/graphic/midpoint_circle.cpp \
+$${LAMNA_SRC}/xos/graphic/hollow_midpoint_circle.cpp \
 $${LAMNA_SRC}/xos/graphic/midpoint_circle_image.cpp \
 $${LAMNA_SRC}/xos/graphic/midpoint_ellipse.cpp \
+$${LAMNA_SRC}/xos/graphic/hollow_midpoint_ellipse.cpp \
 $${LAMNA_SRC}/xos/graphic/midpoint_ellipse_image.cpp \
 $${LAMNA_SRC}/xos/graphic/base_image.cpp \
 $${LAMNA_SRC}/xos/graphic/shape_item.cpp \
