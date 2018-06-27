@@ -54,20 +54,23 @@ $${qtere_DEFINES} \
 #
 vedere_exe_HEADERS += \
 $${FILA_SRC}/xos/console/main_main.hpp \
-$${VEDERE_SRC}/xos/graphic/surface/base.hpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/interface_base.hpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/base.hpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/bresenham_line.hpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/midpoint_circle.hpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/hollow_midpoint_circle.hpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/midpoint_ellipse.hpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/hollow_midpoint_ellipse.hpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/interface.hpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/extend.hpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/shape/base.hpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/shape/bresenham_line.hpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/shape/midpoint_circle.hpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/shape/midpoint_ellipse.hpp \
+$${VEDERE_SRC}/xos/graphic/image/base.hpp \
+$${VEDERE_SRC}/xos/graphic/image/base/interface.hpp \
+$${VEDERE_SRC}/xos/graphic/image/base/extend.hpp \
+$${VEDERE_SRC}/xos/graphic/image/base/image.hpp \
+$${VEDERE_SRC}/xos/graphic/image/bresenham_line.hpp \
+$${VEDERE_SRC}/xos/graphic/image/midpoint_circle.hpp \
+$${VEDERE_SRC}/xos/graphic/image/hollow_midpoint_circle.hpp \
+$${VEDERE_SRC}/xos/graphic/image/midpoint_ellipse.hpp \
+$${VEDERE_SRC}/xos/graphic/image/hollow_midpoint_ellipse.hpp \
+$${VEDERE_SRC}/xos/graphic/image/interface.hpp \
+$${VEDERE_SRC}/xos/graphic/image/shape/bresenham_line.hpp \
+$${VEDERE_SRC}/xos/graphic/image/shape/midpoint_circle.hpp \
+$${VEDERE_SRC}/xos/graphic/image/shape/midpoint_ellipse.hpp \
+$${VEDERE_SRC}/xos/graphic/image/extend.hpp \
+$${VEDERE_SRC}/xos/graphic/image/surface/pixel/interface.hpp \
+$${VEDERE_SRC}/xos/graphic/image/surface/pixel/extend.hpp \
+$${VEDERE_SRC}/xos/graphic/image/surface/qt/pixel.hpp \
 $${QTERE_SRC}/xos/app/gui/qt/MainWindow.hpp \
 $${QTERE_SRC}/xos/app/gui/qt/vedere/MainWindow.hpp \
 $${QTERE_SRC}/xos/app/gui/qt/vedere/Main.hpp \
@@ -76,15 +79,16 @@ $${QTERE_SRC}/xos/app/gui/qt/vedere/Main.hpp \
 #
 vedere_exe_SOURCES += \
 $${FILA_SRC}/xos/console/main_main.cpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/interface_base.cpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/shape/midpoint_circle.cpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/hollow_midpoint_circle.cpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/shape/midpoint_ellipse.cpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/hollow_midpoint_ellipse.cpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/shape/bresenham_line.cpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/shape/base.cpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/interface.cpp \
-$${VEDERE_SRC}/xos/graphic/surface/image/extend.cpp \
+$${VEDERE_SRC}/xos/graphic/image/base.cpp \
+$${VEDERE_SRC}/xos/graphic/image/base/image.cpp \
+$${VEDERE_SRC}/xos/graphic/image/shape/midpoint_circle.cpp \
+$${VEDERE_SRC}/xos/graphic/image/hollow_midpoint_circle.cpp \
+$${VEDERE_SRC}/xos/graphic/image/shape/midpoint_ellipse.cpp \
+$${VEDERE_SRC}/xos/graphic/image/hollow_midpoint_ellipse.cpp \
+$${VEDERE_SRC}/xos/graphic/image/shape/bresenham_line.cpp \
+$${VEDERE_SRC}/xos/graphic/image/surface/pixel/interface.cpp \
+$${VEDERE_SRC}/xos/graphic/image/surface/pixel/extend.cpp \
+$${VEDERE_SRC}/xos/graphic/image/surface/qt/pixel.cpp \
 $${QTERE_SRC}/xos/app/gui/qt/vedere/MainWindow.cpp \
 $${QTERE_SRC}/xos/app/gui/qt/vedere/Main.cpp \
 
@@ -98,5 +102,3 @@ $${qtere_FRAMEWORKS} \
 #
 vedere_exe_LIBS += \
 $${qtere_LIBS} \
-
-
