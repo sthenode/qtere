@@ -63,8 +63,29 @@ protected:
     virtual void onButtonReleaseEvent(const QPoint& pos, const QMouseEvent& event) {
         LOG_DEBUG("this->postMessage(xos::gui::qt::Message::InvalidateWidget)...");
         this->postMessage(xos::gui::qt::Message::InvalidateWidget);
+        onButtonRelease(pos);
+    }
+    virtual void onButtonRelease(const QPoint& pos) {
     }
 
+    virtual size_t fg_color_red() const {
+        size_t value = 0;
+        return value;
+    }
+    virtual size_t fg_color_green() const {
+        size_t value = 0;
+        return value;
+    }
+    virtual size_t fg_color_blue() const {
+        size_t value = 255;
+        return value;
+    }
+
+    virtual int border() const {
+        size_t value = 10;
+        return value;
+    }
+    
 private:
     void construct() {
     }
