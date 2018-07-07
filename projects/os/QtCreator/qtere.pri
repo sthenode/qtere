@@ -186,6 +186,28 @@ rete_LIBS += \
 -l$${RETE_NAME} \
 
 ########################################################################
+# forma
+FORMA_THIRDPARTY_PKG_MAKE_BLD = $${FORMA_THIRDPARTY_PKG}/build/$${QTERE_OS}/$${BUILD_CONFIG}
+FORMA_THIRDPARTY_PRJ_MAKE_BLD = $${FORMA_THIRDPARTY_PRJ}/build/$${QTERE_OS}/$${BUILD_CONFIG}
+FORMA_THIRDPARTY_PKG_BLD = $${FORMA_THIRDPARTY_PKG}/build/$${QTERE_OS}/QtCreator/$${BUILD_CONFIG}
+FORMA_THIRDPARTY_PRJ_BLD = $${FORMA_THIRDPARTY_PRJ}/build/$${QTERE_OS}/QtCreator/$${BUILD_CONFIG}
+FORMA_PKG_BLD = $${OTHER_BLD}/$${FORMA_PKG}/build/$${QTERE_OS}/QtCreator/$${BUILD_CONFIG}
+FORMA_PRJ_BLD = $${OTHER_BLD}/$${FORMA_PRJ}/build/$${QTERE_OS}/QtCreator/$${BUILD_CONFIG}
+#FORMA_LIB = $${FORMA_THIRDPARTY_PKG_MAKE_BLD}/lib
+#FORMA_LIB = $${FORMA_THIRDPARTY_PRJ_MAKE_BLD}/lib
+#FORMA_LIB = $${FORMA_THIRDPARTY_PKG_BLD}/lib
+#FORMA_LIB = $${FORMA_THIRDPARTY_PRJ_BLD}/lib
+#FORMA_LIB = $${FORMA_PKG_BLD}/lib
+FORMA_LIB = $${FORMA_PRJ_BLD}/lib
+#FORMA_LIB = $${QTERE_LIB}
+
+# forma LIBS
+#
+forma_LIBS += \
+-L$${FORMA_LIB}/lib$${FORMA_NAME} \
+-l$${FORMA_NAME} \
+
+########################################################################
 # lamna
 LAMNA_THIRDPARTY_PKG_MAKE_BLD = $${LAMNA_THIRDPARTY_PKG}/build/$${QTERE_OS}/$${BUILD_CONFIG}
 LAMNA_THIRDPARTY_PRJ_MAKE_BLD = $${LAMNA_THIRDPARTY_PRJ}/build/$${QTERE_OS}/$${BUILD_CONFIG}
@@ -268,6 +290,7 @@ qtere_LIBS += \
 $${vedere_LIBS} \
 $${plena_LIBS} \
 $${lamna_LIBS} \
+$${forma_LIBS} \
 $${rete_LIBS} \
 $${fila_LIBS} \
 $${archa_LIBS} \

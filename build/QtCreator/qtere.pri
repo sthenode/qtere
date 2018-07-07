@@ -112,6 +112,24 @@ build_rete_DEFINES += \
 build_rete_LIBS += \
 
 ########################################################################
+# forma
+#
+# pkg-config --cflags --libs forma
+#
+
+# build forma INCLUDEPATH
+#
+build_forma_INCLUDEPATH += \
+
+# build forma DEFINES
+#
+build_forma_DEFINES += \
+
+# build forma LIBS
+#
+build_forma_LIBS += \
+
+########################################################################
 # lamna
 #
 # pkg-config --cflags --libs lamna
@@ -174,6 +192,7 @@ build_qtere_INCLUDEPATH += \
 $${build_vedere_INCLUDEPATH} \
 $${build_plena_INCLUDEPATH} \
 $${build_lamna_INCLUDEPATH} \
+$${build_forma_INCLUDEPATH} \
 $${build_rete_INCLUDEPATH} \
 $${build_fila_INCLUDEPATH} \
 $${build_crono_INCLUDEPATH} \
@@ -189,6 +208,7 @@ $${build_nadir_DEFINES} \
 $${build_crono_DEFINES} \
 $${build_fila_DEFINES} \
 $${build_rete_DEFINES} \
+$${build_forma_DEFINES} \
 $${build_lamna_DEFINES} \
 $${build_plena_DEFINES} \
 $${build_vedere_DEFINES} \
@@ -200,6 +220,7 @@ build_qtere_LIBS += \
 $${build_vedere_LIBS} \
 $${build_plena_LIBS} \
 $${build_lamna_LIBS} \
+$${build_forma_LIBS} \
 $${build_rete_LIBS} \
 $${build_fila_LIBS} \
 $${build_crono_LIBS} \
