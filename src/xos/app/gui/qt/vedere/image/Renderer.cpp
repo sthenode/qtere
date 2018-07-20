@@ -13,19 +13,22 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: MainWindow.cpp
+///   File: Renderer.cpp
 ///
 /// Author: $author$
-///   Date: 6/17/2018
+///   Date: 7/17/2018
 ///////////////////////////////////////////////////////////////////////
-#include "xos/app/gui/qt/vedere/MainWindow.hpp"
+#include "xos/app/gui/qt/vedere/image/Renderer.hpp"
 
 namespace xos {
 namespace app {
 namespace gui {
 namespace qt {
 namespace vedere {
+namespace image {
 
+
+} /// namespace image
 } /// namespace vedere
 } /// namespace qt
 } /// namespace gui

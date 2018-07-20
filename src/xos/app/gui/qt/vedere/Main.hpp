@@ -21,8 +21,9 @@
 #ifndef _XOS_APP_GUI_QT_VEDERE_MAIN_HPP
 #define _XOS_APP_GUI_QT_VEDERE_MAIN_HPP
 
-#include "xos/gui/qt/application/WindowMain.hpp"
 #include "xos/app/gui/qt/vedere/MainWindow.hpp"
+#include "xos/gui/qt/application/WindowMain.hpp"
+#include "xos/app/gui/vedere/main.hpp"
 
 namespace xos {
 namespace app {
@@ -30,26 +31,27 @@ namespace gui {
 namespace qt {
 namespace vedere {
 
-typedef xos::gui::qt::application::WindowMain::implements MaintImplements;
-typedef xos::gui::qt::application::WindowMain MaintExtends;
+typedef xos::gui::qt::application::WindowMain::implements MainImplements;
+typedef gui::vedere::maint
+<MainImplements, gui::vedere::main_optt
+ <MainImplements, xos::gui::qt::application::WindowMain> > MainExtends;
 ///////////////////////////////////////////////////////////////////////
-///  Class: Maint
+///  Class: Main
 ///////////////////////////////////////////////////////////////////////
-template <class TImplements = MaintImplements, class TExtends = MaintExtends>
-class _EXPORT_CLASS Maint: virtual public TImplements, public TExtends {
+class _EXPORT_CLASS Main: virtual public MainImplements, public MainExtends {
 public:
-    typedef TImplements implements;
-    typedef TExtends extends;
+    typedef MainImplements implements;
+    typedef MainExtends extends;
 
-    Maint()
+    Main()
     : mainWindow_(0), 
       mainWindowWidth_(defaultMainWindowWidth()),
       mainWindowHeight_(defaultMainWindowHeight()) {
     }
-    virtual ~Maint() {
+    virtual ~Main() {
     }
 private:
-    Maint(const Maint &copy) {
+    Main(const Main &copy) {
         LOG_ERROR("...unexpected throw (exception(exception_failed))...");
         throw (exception(exception_failed));
     }
@@ -78,6 +80,16 @@ protected:
 
             LOG_DEBUG("mainWindow->afterCreate(qApplication, argc, argv, env)...");
             if ((mainWindow->afterCreate(qApplication, argc, argv, env))) {
+                size_t width = image_width(), height = image_height(), depth = image_depth();
+                const char* file = image_file();
+                gui::vedere::image::format_t format = image_format();
+                gui::vedere::image::transform_t transform = image_transform();
+
+                LOG_DEBUG("mainWindow->init(width = " << width << ", height = " << height << ", depth = " << depth << ", file = \"" << file << "\", format, transform)...");
+                if (!(mainWindow->init(width, height, depth, file, format, transform))) {
+                } else {
+                    LOG_ERROR("...failed on mainWindow->init(width = " << width << ", height = " << height << ", depth = " << depth << ", file = \"" << file << "\", format, transform)");
+                }
                 return true;
             } else {
                 LOG_ERROR("...failed on mainWindow->afterCreate(qApplication, argc, argv, env)");
@@ -92,6 +104,9 @@ protected:
 
         if (qMainWindow == (mainWindow = mainWindow_)) {
 
+            LOG_DEBUG("mainWindow->finish()...");
+            mainWindow->finish();
+            
             LOG_DEBUG("mainWindow->beforeDestroy(qApplication, argc, argv, env)...");
             if ((mainWindow->beforeDestroy(qApplication, argc, argv, env))) {
                 return true;
@@ -120,7 +135,6 @@ protected:
     MainWindow* mainWindow_;
     size_t mainWindowWidth_, mainWindowHeight_;
 };
-typedef Maint<> Main;
 
 } /// namespace vedere
 } /// namespace qt

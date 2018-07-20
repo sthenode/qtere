@@ -21,7 +21,9 @@
 #ifndef _XOS_APP_GUI_QT_VEDERE_MAINWINDOW_HPP
 #define _XOS_APP_GUI_QT_VEDERE_MAINWINDOW_HPP
 
+#include "xos/app/gui/qt/vedere/MainWidget.hpp"
 #include "xos/app/gui/qt/MainWindow.hpp"
+#include "xos/app/gui/vedere/main_window.hpp"
 #include "xos/graphic/image/surface/shape/filled_circle.hpp"
 #include "xos/graphic/image/surface/shape/filled_ellipse.hpp"
 #include "xos/graphic/image/surface/qt/color.hpp"
@@ -32,36 +34,85 @@ namespace gui {
 namespace qt {
 namespace vedere {
 
-typedef qt::MainWindowtImplements MainWindowtImplements;
-typedef qt::MainWindow MainWindowtExtends;
+typedef gui::vedere::main_windowt
+<gui::vedere::main_window_extendt<qt::MainWindow> > MainWindowExtends;
 ///////////////////////////////////////////////////////////////////////
-///  Class: MainWindowt
+///  Class: MainWindow
 ///////////////////////////////////////////////////////////////////////
-template 
-<class TImplements = MainWindowtImplements, class TExtends = MainWindowtExtends>
-
-class _EXPORT_CLASS MainWindowt: virtual public TImplements, public TExtends {
+class _EXPORT_CLASS MainWindow: public MainWindowExtends {
 public:
-    typedef TImplements implements;
-    typedef TExtends extends;
-    typedef MainWindowt derives;
+    typedef MainWindowExtends extends;
+    typedef MainWindow derives;
 
-    MainWindowt(): plot_(0), paint_(0) {
-        construct();
+    MainWindow(): plot_(0), paint_(0), widget_(0) {
     }
-    virtual ~MainWindowt() {
-        destruct();
+    virtual ~MainWindow() {
     }
 private:
-    MainWindowt(const MainWindowt &copy): plot_(0), paint_(0) {
+    MainWindow(const MainWindow &copy): plot_(0), paint_(0), widget_(0) {
         LOG_ERROR("...unexpected throw (exception(exception_failed))...");
         throw (exception(exception_failed));
     }
     
-private:
-    void construct() {
+public:
+    virtual bool init
+    (size_t image_width, size_t image_height, size_t image_depth,
+     const char_t* image_file, gui::vedere::image::format_t image_format,
+     gui::vedere::image::transform_t image_transform) {
+        if ((widget_)) {
+            if (widget_->init(image_transform)) {
+                setCentralWidget(widget_);
+                widget_->show();
+                load_image
+                (image_width, image_height,
+                 image_depth, image_file, image_format);
+            }
+        }
+        return true;
     }
-    void destruct() {
+    virtual bool finish() {
+        if ((widget_)) {
+            widget_->finish();
+            widget_->hide();
+        }
+        return true;
+    }
+
+    using extends::load_image;
+    virtual void* load_image
+    (io::byte_reader& reader, size_t size, size_t width, size_t height) {
+        if ((widget_)) {
+            return widget_->load_image(reader, size, width, height);
+        }
+        return false;
+    }
+    virtual void* set_image
+    (byte_t* bytes, size_t size, size_t width, size_t height) {
+        if ((widget_)) {
+            return widget_->set_image(bytes, size, width, height);
+        }
+        return 0;
+    }
+    virtual const void* image
+    (size_t& size, size_t& width, size_t& height) const {
+        if ((widget_)) {
+            return widget_->image(size, width, height);
+        }
+        return 0;
+    }
+
+    virtual bool afterCreate
+    (QApplication& qApplication, int argc, char_t** argv, char_t** env) {
+        LOG_DEBUG("new MainWidget(this)...");
+        if ((widget_ = new MainWidget(this))) {
+            LOG_DEBUG("this->setCentralWidget(widget_ = " << pointer_to_string(widget_) << ")...");
+            widget_->hide();
+        }
+        return true;
+    }
+    virtual bool beforeDestroy
+    (QApplication& qApplication, int argc, char_t** argv, char_t** env) {
+        return true;
     }
 
 protected:
@@ -188,6 +239,9 @@ protected:
                 paint_ = &derives::ellipse_paint;
             } else {
                 paint_ = &derives::color_paint;
+                if ((widget_)) {
+                    widget_->show();
+                }
             }
         }
         return plot_;
@@ -206,6 +260,7 @@ protected:
     virtual void paintEvent(QPaintEvent* event) {
         QMainWindow* qMainWindow = 0;
 
+        extends::paintEvent(event);
         if ((qMainWindow = this)) {
             int width = qMainWindow->width(), height = qMainWindow->height(), x = 0, y = 0;
 
@@ -222,8 +277,8 @@ protected:
 protected:
     plot_t plot_;
     paint_t paint_;
+    MainWidget* widget_;
 };
-typedef MainWindowt<> MainWindow;
 
 } /// namespace vedere
 } /// namespace qt
