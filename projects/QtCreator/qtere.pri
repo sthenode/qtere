@@ -502,6 +502,7 @@ $${QTERE_SRC} \
 $${vedere_INCLUDEPATH} \
 $${plena_INCLUDEPATH} \
 $${lamna_INCLUDEPATH} \
+$${forma_INCLUDEPATH} \
 $${rete_INCLUDEPATH} \
 $${fila_INCLUDEPATH} \
 $${archa_INCLUDEPATH} \
@@ -521,6 +522,7 @@ $${arbora_DEFINES} \
 $${archa_DEFINES} \
 $${fila_DEFINES} \
 $${rete_DEFINES} \
+$${forma_DEFINES} \
 $${lamna_DEFINES} \
 $${plena_DEFINES} \
 $${vedere_DEFINES} \

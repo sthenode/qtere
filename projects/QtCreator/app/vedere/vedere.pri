@@ -84,7 +84,10 @@ $${LAMNA_SRC}/xos/graphic/image/surface/qt/context.hpp \
 $${LAMNA_SRC}/xos/graphic/image/surface/qt/area.hpp \
 $${LAMNA_SRC}/xos/graphic/image/surface/qt/shape.hpp \
 $${LAMNA_SRC}/xos/graphic/image/surface/qt/color.hpp \
+$${QTERE_SRC}/xos/app/gui/qt/vedere/image/Renderer.hpp \
+$${QTERE_SRC}/xos/app/gui/qt/vedere/Renderer.hpp \
 $${QTERE_SRC}/xos/app/gui/qt/MainWindow.hpp \
+$${QTERE_SRC}/xos/app/gui/qt/vedere/MainWidget.hpp \
 $${QTERE_SRC}/xos/app/gui/qt/vedere/MainWindow.hpp \
 $${QTERE_SRC}/xos/app/gui/qt/vedere/Main.hpp \
 
@@ -108,6 +111,8 @@ $${LAMNA_SRC}/xos/graphic/image/surface/qt/context.cpp \
 $${LAMNA_SRC}/xos/graphic/image/surface/qt/area.cpp \
 $${LAMNA_SRC}/xos/graphic/image/surface/qt/shape.cpp \
 $${LAMNA_SRC}/xos/graphic/image/surface/qt/color.cpp \
+$${QTERE_SRC}/xos/app/gui/qt/vedere/Renderer.cpp \
+$${QTERE_SRC}/xos/app/gui/qt/vedere/MainWidget.cpp \
 $${QTERE_SRC}/xos/app/gui/qt/vedere/MainWindow.cpp \
 $${QTERE_SRC}/xos/app/gui/qt/vedere/Main.cpp \
 

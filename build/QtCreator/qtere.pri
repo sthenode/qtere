@@ -20,6 +20,34 @@
 #
 # build QtCreator .pri file for qtere
 ########################################################################
+HOME_UNAME = $$system(uname)
+
+contains(HOME_UNAME,Darwin) {
+HOME = /Users/jboyd
+} else {
+HOME = /home/jboyd
+}
+
+########################################################################
+# libpng
+#
+# pkg-config --cflags --libs libpng
+#
+
+# build libpng INCLUDEPATH
+#
+build_libpng_INCLUDEPATH += \
+$${HOME}/build/libpng/include \
+
+# build libpng DEFINES
+#
+build_libpng_DEFINES += \
+
+# build libpng LIBS
+#
+build_libpng_LIBS += \
+-L${HOME}/build/libpng/lib \
+-lpng \
 
 ########################################################################
 # rostra
@@ -198,11 +226,13 @@ $${build_fila_INCLUDEPATH} \
 $${build_crono_INCLUDEPATH} \
 $${build_nadir_INCLUDEPATH} \
 $${build_rostra_INCLUDEPATH} \
+$${build_libpng_INCLUDEPATH} \
 
 
 # build qtere DEFINES
 #
 build_qtere_DEFINES += \
+$${build_libpng_DEFINES} \
 $${build_rostra_DEFINES} \
 $${build_nadir_DEFINES} \
 $${build_crono_DEFINES} \
@@ -226,5 +256,6 @@ $${build_fila_LIBS} \
 $${build_crono_LIBS} \
 $${build_nadir_LIBS} \
 $${build_rostra_LIBS} \
+$${build_libpng_LIBS} \
 
 

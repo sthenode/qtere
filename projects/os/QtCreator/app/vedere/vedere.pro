@@ -46,7 +46,7 @@ $${vedere_exe_OBJECTIVE_HEADERS} \
 
 # OBJECTIVE_SOURCES
 #
-SOURCES += \
+OBJECTIVE_SOURCES += \
 $${vedere_exe_OBJECTIVE_SOURCES} \
 
 ########################################################################
@@ -59,7 +59,6 @@ $${vedere_exe_HEADERS} \
 #
 SOURCES += \
 $${vedere_exe_SOURCES} \
-$${OBJECTIVE_SOURCES} \
 
 ########################################################################
 # FRAMEWORKS
