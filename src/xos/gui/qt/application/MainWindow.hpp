@@ -23,6 +23,10 @@
 
 #include "xos/gui/qt/Widget.hpp"
 
+#if (!defined(WINDOWS) || !(QT_VERSION < 0x040700))
+#define XOS_GUI_QT_APPLICATION_MAINWINDOW_ACCEPT_DROPS
+#endif /// (!defined(WINDOWS) || !(QT_VERSION < 0x040700))
+
 namespace xos {
 namespace gui {
 namespace qt {
@@ -37,6 +41,8 @@ class _EXPORT_CLASS MainWindowt: public TExtends {
 public:
     typedef TExtends extends;
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     MainWindowt() {
     }
     virtual ~MainWindowt() {
@@ -48,6 +54,8 @@ private:
     }
 
 public:
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual bool afterCreate
     (QApplication& qApplication, int argc, char_t** argv, char_t** env) {
         return true;
@@ -58,10 +66,14 @@ public:
     }
 
 protected:
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual void resizeEvent(QResizeEvent *event) {
         extends::resizeEvent(event);
     }
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 protected:
 };
 typedef MainWindowt<> MainWindow;

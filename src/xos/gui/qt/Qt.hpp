@@ -21,6 +21,7 @@
 #ifndef _XOS_GUI_QT_QT_HPP
 #define _XOS_GUI_QT_QT_HPP
 
+#include "xos/base/to_string.hpp"
 #include "xos/io/logger.hpp"
 #include <QtCore/QtCore>
 #if  (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))

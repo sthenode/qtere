@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2018 $organization$
+/// Copyright (c) 1988-2019 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -16,30 +16,25 @@
 ///   File: MainWindow.hpp
 ///
 /// Author: $author$
-///   Date: 6/17/2018
+///   Date: 10/22/2019
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_APP_GUI_QT_MAINWINDOW_HPP
-#define _XOS_APP_GUI_QT_MAINWINDOW_HPP
+#ifndef _XOS_MAINWINDOW_HPP
+#define _XOS_MAINWINDOW_HPP
 
-#include "xos/gui/qt/application/MainWindow.hpp"
-
-#if defined(XOS_GUI_QT_APPLICATION_MAINWINDOW_ACCEPT_DROPS)
-#define XOS_GUI_QT_MAINWINDOW_ACCEPT_DROPS
-#endif /// defined(XOS_GUI_QT_APPLICATION_MAINWINDOW_ACCEPT_DROPS)
+#include "xos/app/gui/qt/MainWindow.hpp"
 
 namespace xos {
 namespace app {
 namespace gui {
 namespace qt {
+namespace progress {
 
-typedef implement_base MainWindowtImplements;
-typedef xos::gui::qt::application::MainWindow MainWindowtExtends;
+typedef app::gui::qt::MainWindow::implements MainWindowt_implements;
+typedef app::gui::qt::MainWindow MainWindowt_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: MainWindowt
 ///////////////////////////////////////////////////////////////////////
-template 
-<class TImplements = MainWindowtImplements, class TExtends = MainWindowtExtends>
-
+template <class TImplements = MainWindowt_implements, class TExtends = MainWindowt_extends>
 class _EXPORT_CLASS MainWindowt: virtual public TImplements, public TExtends {
 public:
     typedef TImplements implements;
@@ -49,10 +44,8 @@ public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     MainWindowt() {
-        construct();
     }
     virtual ~MainWindowt() {
-        destruct();
     }
 private:
     MainWindowt(const MainWindowt &copy) {
@@ -60,60 +53,79 @@ private:
         throw exception(exception_unexpected);
     }
 
+public:
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual bool afterCreate
+    (QApplication& qApplication, int argc, char_t** argv, char_t** env) {
+        if ((progressBar_ = new QProgressBar(this))) {
+            progressBar_->setMinimum(0);
+            progressBar_->setMaximum(100);
+            progressBar_->setValue(50);
+            progressBar_->setTextVisible(false);
+            progressBar_->show();
+        }
+        return true;
+    }
+    virtual bool beforeDestroy
+    (QApplication& qApplication, int argc, char_t** argv, char_t** env) {
+        return true;
+    }
+
 protected:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual void onMessage(const xos::gui::qt::Message::Type& type, const xos::gui::qt::Message::Data& data) {
-        if (xos::gui::qt::Message::InvalidateWidget == (type)) {
-            this->update();
+    virtual void resizeEvent(QResizeEvent *event) {
+        size_t width = this->width(), height = this->height();
+        LOG_DEBUG("extends::resizeEvent(event)...");
+        extends::resizeEvent(event);
+        if (progressBar_) {
+            progressBar_->resize(width, progressBar_->height());
+            progressBar_->move(0, height - progressBar_->height());
         }
     }
-    virtual void onButtonReleaseEvent(const QPoint& pos, const QMouseEvent& event) {
-        LOG_DEBUG("this->postMessage(xos::gui::qt::Message::InvalidateWidget)...");
-        this->postMessage(xos::gui::qt::Message::InvalidateWidget);
-        onButtonRelease(pos);
-    }
-    virtual void onButtonRelease(const QPoint& pos) {
+    virtual void paintEvent(QPaintEvent *event) {
+        extends::paintEvent(event);
     }
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual size_t fg_color_red() const {
-        size_t value = 0;
-        return value;
+    virtual bool HideProgress() {
+        if ((progressBar_)) {
+            progressBar_->hide();
+            return true;
+        }
+        return false;
     }
-    virtual size_t fg_color_green() const {
-        size_t value = 0;
-        return value;
+    virtual bool ShowProgress(int maximum = 100) {
+        if ((progressBar_)) {
+            progressBar_->setMaximum(maximum);
+            if ((UpdateProgress())) {
+                progressBar_->show();
+                return true;
+            }
+        }
+        return false;
     }
-    virtual size_t fg_color_blue() const {
-        size_t value = 255;
-        return value;
-    }
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    virtual int border() const {
-        size_t value = 10;
-        return value;
-    }
-    
-private:
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    void construct() {
-    }
-    void destruct() {
+    virtual bool UpdateProgress(int value = 100) {
+        if ((0 < (value)) && (progressBar_)) {
+            progressBar_->setValue(value);
+            return true;
+        }
+        return false;
     }
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-};
+protected:
+    QProgressBar* progressBar_;
+}; /// class _EXPORT_CLASS MainWindowt
 typedef MainWindowt<> MainWindow;
 
+} /// namespace progress
 } /// namespace qt
 } /// namespace gui
 } /// namespace app
 } /// namespace xos
 
-#endif /// _XOS_APP_GUI_QT_MAINWINDOW_HPP 
+#endif /// _XOS_MAINWINDOW_HPP 
